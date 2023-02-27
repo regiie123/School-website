@@ -1,0 +1,152 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<title>iPLM</title>
+<head>
+  <style>
+  #ListOfRequirements
+  {
+      font-size: 16px;
+      font-family: Nunito;
+      color: white;
+}
+  </style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito">
+ <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+ 
+ <link rel="stylesheet" href="{% static 'CRS/css/landingPage/styles.css' %}">
+ <!--  ICON -->
+<link rel="icon" href="{% static 'CRS/images/landingPage/iPLMlogo.png' %}" type="image/png" sizes="16x16">
+
+<style>
+  body{
+    overflow-y: hidden;
+  }
+  .applicantInfo{
+	color: white;
+	margin-left: 10px;
+	margin-top: 10px;
+	font-size: 14px;
+}
+
+.applicantInfo :hover{
+  color: #abc9f7;
+}
+
+#rounded
+	{
+	border-radius: 25px;
+	background: white;
+	width: 400px;
+	height: 200px;
+}
+
+#welcometext
+	{
+	font-size: 45px;
+	font-family: Nunito;
+	color: white;
+  margin-top: 30px;
+}
+
+.btn7 {
+	border: 1px solid white;
+	background-color: #0C66CC;
+	font-size: 12px;
+	font-family: Nunito;
+	cursor: pointer;
+	margin: 10px;
+	color: white;
+	transition: 0.8;
+	border-radius: 12px;
+	height: 35px;
+	width: 100px;
+	transition-duration: 0.4s;
+}
+
+</style>
+</head>
+<body>
+
+<div class="container pads">
+<div class="row">
+<div class="col-md-9 col-lg-6  col-sm-10">
+<picture><p id="imageplm"><img src="{% static 'CRS/images/landingPage/iplm.png' %}" alt="iplm" width="457px" height="343px"></p>
+  <p class="description">in collaboration with</p>
+  
+  <div class="centerImg">
+    <img src="{% static 'CRS/images/landingPage/plm.png' %}" alt="plm" width="40px" height="auto">
+    <img src="{% static 'CRS/images/landingPage/cet.png' %}" alt="plm" width="45px" height="auto">
+    <img src="{% static 'CRS/images/landingPage/it.png' %}" alt="plm" width="40px" height="auto">
+    <img src="{% static 'CRS/images/landingPage/ee.png' %}" alt="plm" width="40px" height="auto">
+  </div>
+</picture> 
+
+</div>
+
+
+<!--tabs--> 
+
+
+<div class="col-md-3 col-lg-6  col-sm-2">
+  <h1 id="welcometext">Welcome!</h1>
+  {% if messages %}
+  {% for message in messages %}
+  <p id=ListOfRequirements style="color: #ff8f3c;">  {{ message }} </p>
+  {% endfor %}
+{% endif %}
+
+  <table id="rounded"> 
+    
+    <tr>
+      <td class="d-flex justify-content-start ml-5 pt-4"> 
+        <p id="login"><img src="{% static 'CRS/images/landingPage/userBlue.png' %}" alt="iplm" width="32px" height="auto">&nbsp;&nbsp;&nbsp;Log In<br></p>
+      </td>  
+
+      <td class="d-flex  ml-5 pt-4">
+        <hr></td> 
+    </tr>
+    
+    <tr> 
+      <td>
+      <form  method = 'POST'>
+        <br>
+        {% csrf_token %}
+        <p id="tusername">email &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="email" id="email" name="email" required> </p> 
+        <p id="tpassword">password &nbsp; &nbsp; <input type="password" id="password" name="password" required> </p> 
+        
+        </td> </tr> 
+    
+        <tr> <td> <p class="d-flex justify-content-end align-items-start mr-5"> <input type="submit" class="btn7" value="Log in"></p> </td> </tr>    
+      </form> 
+
+
+</table>
+<p class="applicantInfo">Are you an applicant? <a href="{% url 'applicant' %}">click here</a></p>
+  
+
+  
+</div>
+
+</div>
+<picture>
+<p id="gridplm"><img src="{% static 'CRS/images/landingPage/grid.png' %}" alt="grid" width="300px" height="300px"></p> </picture>
+
+<!-- tether, jQuery first, then Tether, then Bootstrap JS. -->
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>   
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+	
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> 
+
+</body>
+</html>

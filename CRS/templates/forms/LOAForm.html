@@ -1,0 +1,333 @@
+{% load static %}
+<html>
+<head>
+	<title>Leave of Absence Form</title>
+</head>
+<style>
+	.header{
+			text-align: center;
+			margin-left: 20px;
+			align-content: center;
+			 }
+	
+	
+	#logo{
+			position:absolute;
+			left:430px;
+			top:20px;
+	}
+	
+	
+	@media (min-width: 1600px) {
+		body{
+		
+		}
+	
+		
+	}
+	</style>
+<body>
+	<table align="center">
+		<tr>
+			<td>
+				<img src="#", height="70px" width="70px">
+			</td>
+			
+			<td align="center">
+				Republic of the Philippines
+				<br>
+				<b>PAMANTASAN NG LUNGSOD NG MAYNILA</b>
+				<br>
+				<i>(University of the City of Manila)</i>
+				<br>
+				General Luna Street corner Muralla Street
+				<br>
+				Intramuros, Manila
+			</td>
+		</tr>
+		
+		<tr>
+			<td colspan=2 align="center">
+			<br><br>
+			<b>LEAVE OF ABSENCE FORM</b>
+			<br><br>
+			</td>
+		</tr>
+	</table>
+
+<table align="center" width=100%>
+	<tr>
+		<td colspan=1>
+			Date of Filing: 
+		</td>
+		
+
+		<td colspan=1>
+			<u><b>{{dof}}</b></u>
+		</td>
+		
+		<td colspan=2 width=50%>
+		</td>
+	</tr>
+	
+	<tr>
+		<td>
+			Student No.:
+		</td>
+		
+		<td>
+			<u><b>{{info.studentID}}</b></u>
+		</td>
+	
+			<td>
+			College:
+		</td>
+		
+		<td>
+			<u><b>{{info.collegeID}}</b></u>
+		</td>
+	</tr>
+	
+	<tr>
+		<td>
+			Student Name:
+		</td>
+		
+		<td>
+			<u><b>{{info.studentUser.firstName}} {{info.studentUser.middleName}} {{info.studentUser.lastName}}</b></u>
+		</td>
+	
+			<td>
+			Course:
+		</td>
+		
+		<td>
+			<u><b>{{info.studentCourse}} </b></u>
+		</td>
+	</tr>
+
+	<tr>
+		<td>
+			Student Type.:
+		</td>
+		
+		<td>
+			<u><b> {{info.studentType}}</b></u>
+		</td>
+	
+			<td>
+			Year Level:
+		</td>
+		
+		<td>
+			<u><b>{{info.studentYearlevel}}</b></u>
+		</td>
+	</tr>
+
+	<tr>
+		<td>
+			Academic Status:
+		</td>
+		
+		<td>
+			<u><b>{{info.studentRegStatus}}</b></u>
+		</td>
+	
+			<td>
+			GWA:
+		</td>
+		
+		<td>
+			<u><b>{{genave}}</b></u>
+		</td>
+	</tr>
+</table>
+
+<table align="center" width=100%>
+	<tr>
+		<td>
+			Effective From:
+		</td>
+		
+		<td>
+			Sem/Term, SY:
+		</td>
+		
+		<td>
+			<u><b>{{sem}},{{sy}}</b></u>
+		</td>
+		
+		<!-- PLEASE CHECK HERE KASI IDK KUNG ANO GAGAWIN NIYO DITO TO SOLID THE COLOR OF THE BOX DAHIL SA REQUIREMENTS-->
+		<td rowspan=3> 
+		<b>Please Attached the Following:</b>
+		<br>
+		&#9744 Letter of Request for LOA
+		<br>
+		&#9744 Clerance from Registrar
+		<br>
+		&#9744 Note of Undertaking <i>(if applicable)</i>
+		<br>
+		&#9744 Student's Checklist & Study Plan
+		</td>
+	</tr>
+	
+	<tr>
+		<td>
+			Effective Until:
+		</td>
+		
+		<td>
+			Sem/Term, SY:
+		</td>
+		
+		<td>
+			<u><b>{{sem2}},{{sy2}}</b></u>
+		</td>
+	</tr>
+
+	<tr>
+		<td>
+			Reason:
+		</td>
+		
+		<td colspan=3>
+			<u><b>{{reason}}</b></u>
+		</td>
+</table>
+<br><br>
+<table align="center" width=100%>
+	<tr>
+		<td align="center">
+			<u><b>{{info.studentUser.firstName}} {{info.studentUser.middleName}} {{info.studentUser.lastName}}</u></b>
+			<br>
+			Student's Signature over printed name
+		</td>
+		
+		<td align="center">
+			<u><b>{{info.studentUser.firstName}} {{info.studentUser.middleName}} {{info.studentUser.lastName}}</u></b>
+			<br>
+			Student's Signature over printed name
+		</td>
+	</tr>
+</table>
+
+<table border=1 align="center" width=100%>
+	<tr>
+		<td>
+			<table align="center" width=100%>
+				<tr>
+					<td colspan=2>
+						1. Endorsed by:
+					</td>
+				</tr>
+				
+				<tr>
+					<td colspan=1 align="center" width=70%>
+						<u><b>{{info.departmentID.chairperson.cpersonUser.firstName}} {{info.departmentID.chairperson.cpersonUser.middleName}} {{info.departmentID.chairperson.cpersonUser.lastName}}</b></u>
+						<br>
+						Department Chair
+					</td>
+					
+					<td colspan=1 align="center">
+						<u><b>{{dof}}</b></u>
+						<br>
+						Date
+					</td>					
+			</table>
+		</td>
+	</tr>
+	
+	<tr>
+		<td>
+			<table  align="center" width=100%>
+				<tr>
+					<td colspan=2>
+						2. Recommending Approval:
+					</td>
+				</tr>
+				
+				<tr>
+					<td colspan=1 align="center" width=70%>
+						
+						College Dean
+					</td>
+					
+					<td colspan=1 align="center">
+						<u><b>{{dof}}</b></u>
+						<br>
+						Date
+					</td>					
+			</table>
+		</td>
+	</tr>
+	
+	<tr>
+		<td>
+			<table align="center" width=100%>
+				<tr>
+					<td colspan=2>
+						3. Recommending Approval:
+					</td>
+				</tr>
+				
+				<tr>
+					<td colspan=1 align="center" width=70%>
+						University Registrar
+					</td>
+					
+					<td colspan=1 align="center">
+						<u><b>{{dof}}</b></u>
+						<br>
+						Date
+					</td>					
+			</table>
+		</td>
+	</tr>	
+	
+	<tr>
+		<td>
+			<table align="center" width=100%>
+				<tr>
+					<td colspan=2>
+						4. Approved/Disaaproved:
+					</td>
+				</tr>
+				
+				<tr>
+					<td colspan=1 align="center" width=70%>
+						
+						Vice President of Academic Affairs
+					</td>
+					
+					<td colspan=1 align="center">
+						<u><b>{{dof}}</b></u>
+						<br>
+						Date
+					</td>					
+			</table>
+		</td>
+	</tr>
+</table>
+PAO 13 S. 2014
+<br><br>
+<table align="center" width=100%>
+	<tr>
+		<td>
+			Signed:
+		</td>
+	</tr>
+	
+	<tr>
+		<td>
+			<b>{{info.departmentID.chairperson.cpersonUser.firstName}} {{info.departmentID.chairperson.cpersonUser.middleName}} {{info.departmentID.chairperson.cpersonUser.lastName}}</b>
+		</td>
+	</tr>
+
+	<tr>
+		<td>
+			      Chairperson, {{info.departmentID}}
+		</td>
+	</tr>
+</table>
+</body>
+</html>

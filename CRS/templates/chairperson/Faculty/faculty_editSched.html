@@ -1,0 +1,180 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Individual Student</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
+    <link rel="stylesheet" href="{% static 'CRS/css/cFaculty/cFacultystyle.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito">
+     <!--Icon-->
+     <link rel="icon" href="{% static 'CRS/images/cDepartment/iPLM.png' %}" type="image/png" sizes="16x16">
+</head>
+
+<body>
+{%block content %}
+    <div class="wrapper">
+
+        <!-- Sidebar -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <li>
+                    <p><br><br><img src="{% static 'CRS/images/cFaculty/hat.png' %}" width="87px" height="60px"><br><br>
+                </li>
+            </div>
+            <ul class="sidebar components">
+                <li class="active"><a href="{% url 'chairperson' %}"><img src="{% static 'CRS/images/cDepartment/home.svg' %}" width="54px" height="68.71px"></a></li>
+                <li><a href="{% url 'is_active' %}"><img src="{% static 'CRS/images/cDepartment/department.svg' %}" width="97px" height="60.56px"></a></li>
+                <li><a href="{% url 'dept_student' %}"><img src="{% static 'CRS/images/cDepartment/students.svg' %}" width="90px" height="67.14px"></a></li>
+                <li><a href="{% url 'full_time' %}"><img src="{% static 'CRS/images/cDepartment/faculty.svg' %}" width="65px" height="74.22px"></a></li>
+                <li><a href="{% url 'cOthers-studyPlan' %}"><img src="{% static 'CRS/images/cDepartment/others.svg' %}" width="61px" height="68.06px"></a></li>
+                <li><a href="{% url 'logout' %}"><img src="{% static 'CRS/images/cDepartment/log-out.svg' %}" width="72px" height="68.71px"></a></li>
+            </ul>
+        </nav>
+    <!--End of Sidebar -->
+
+        <!-- Content -->
+        <div id="content">
+
+            <div class=" container-fluid">
+                <br><br><br><br>
+                <div class="col-lg-1"><a class="back" href="{% url 'faculty_schedule' info.facultyUser.id  %}"><img src="{% static 'CRS/images/cFaculty/back.svg' %}" width="50" height="45" id="backlogo"></a>
+                </div>
+
+                <br><br>
+
+                <div class="indvstud row">        
+                                                   
+                    
+                    <!--Right Side / SCHEDULE-->
+                    {% if messages %}
+                    {% for message in messages %}
+                    <p id="subjectMessage"> {{ message }} </p>
+                    {% endfor %}
+                {% endif %}
+                    <div class="tableTitle">Enlisted Subjects&nbsp;&nbsp;</div>
+                    <button class="buttonSession" id="buttonSessionRegular"><b>{{info.facultyID}}</b></button>
+                    <button class="buttonSession active" id="buttonSessionOnline"><b>{{info.facultyUser.lastName}}, {{info.facultyUser.firstName}} </b></button>
+                    <button class="buttonSession active" id="buttonSessionOnline"><b>Time Availability : </b>{{info.facultyIn}} - {{info.facultyOut}} </button>
+
+                        <div class="fill-in col-lg-8 pr-0"><br><br>
+                            <form>
+                                <div class="tablepanel-2 table-responsive-lg">
+                                    <table class="borderless table">
+    
+                                        <tr class="primary-att-2"><!-- TABLE HEADER -->
+                                            <th scope="col"><p id="head3"><b>Subject Code</b></p></th>
+                                            <th scope="col"><p id="head3"><b>Subject Name</b></p></th>
+                                            <th scope="col"><p id="head3"><b>Section</b></p></th>
+                                            <th scope="col"><p id="head3"><b>Day</b></p></th>
+                                            <th scope="col"><p id="head3"><b>Time Start</b></p></th>
+                                            <th scope="col"><p id="head3"><b>Time End</b></p></th>
+                                            <th scope="col"><p id="head3"><b>Session Type</b></p> </th>
+                                            <th scope="col"><p id="head3"><b>Remove</b></p> </th>
+                                        </tr>
+                                        {% for i in facultySchedule %}
+                                        <tr class="tabletext2-2"><!-- FIRST ROW / SUBJECT -->
+                                            <td><p> {{i.subjectCode.subjectCode.subjectCode}}</p></td> <!-- DB SUBJECT CODE -->
+                                            <td><p> {{i.subjectCode.subjectCode.subjectName}}</p></td><!-- DB SUBJECT NAME -->
+                                            <td><p>  {{i.subjectCode.blockCourse}}{{ i.realsection}}</p></td><!-- DB SECTION -->
+                                            <td><p> {{ i.day}} </p></td><!-- DB DAY -->
+                                            <td><p>{{ i.timeStart}} </p></td><!-- DB TIME IN -->
+                                            <td><p>  {{ i.timeEnd}}</p></td><!-- DB TIME OUT -->
+                                            <td><p>  {{i.type}} </p></td>
+                                            <td id="manage2">
+                                                <div class="manage2 row"><!-- DB MANAGE FACULTY BUTTON BELOW -->
+                                                    <a href='remove={{i.id}}' style="margin-left: 15px;"><img src="{% static 'CRS/images/cFaculty/minus.png' %}" width="auto" height="20px"></a>
+                                                </div>
+                                            </td>    
+                                        </tr>
+                                        {% endfor %}
+                                    </table> 
+                                    
+
+                                </div>  
+                            </form>  
+
+                            <br><hr class = "grey"><br>
+
+                            <div class="tableTitle" style="margin-left: 55px;">Subjects&nbsp;&nbsp;</div><br>
+                            <form>
+                                <div class="tablepanel-2 table-responsive-lg">
+                                    <table class="borderless table">
+    
+                                        <tr class="primary-att-2"><!-- TABLE HEADER -->
+                                            <th scope="col"><p id="head3">Subject Code</p></th>
+                                            <th scope="col"><p id="head3">Subject Name</p></th>
+                                            <th scope="col"><p id="head3">Section</p></th>
+                                            <th scope="col"><p id="head3">Day</p></th>
+                                            <th scope="col"><p id="head3">Time Start</p></th>
+                                            <th scope="col"><p id="head3">Time End</p></th>
+                                            <th scope="col"><p id="head3">Session Type</p> </th>
+                                            <th scope="col"><p id="head3">Add</p> </th>
+                                        </tr>
+                                        {% for i in schedule %}
+                                        {%if i.subjectCode.blockCourse == cperson.departmentID.courseName and i.subjectCode.subjectCode.college.collegeName == 'CET' %}
+                                        <tr class="tabletext2-2"><!-- FIRST ROW / SUBJECT -->
+                                            <td><p> {{i.subjectCode.subjectCode.subjectCode}}</p></td> <!-- DB SUBJECT CODE -->
+                                            <td><p> {{i.subjectCode.subjectCode.subjectName}}</p></td><!-- DB SUBJECT NAME -->
+                                            <td><p> {{i.subjectCode.blockCourse}}{{ i.realsection}} </p></td><!-- DB SECTION -->
+                                            <td><p>  {{ i.day}} </p></td><!-- DB DAY -->
+                                            <td><p>  {{ i.timeStart}} </p></td><!-- DB TIME IN -->
+                                            <td><p>  {{ i.timeEnd}} </p></td><!-- DB TIME OUT -->
+                                            <td><p>  {{ i.type}}</p></td><!-- DB SESSION TYPE -->
+                                            <td id="manage2">
+                                                <div class="manage2 row"><!-- DB MANAGE FACULTY BUTTON BELOW -->
+                                                    <a href='add={{i.id}}' style="margin-left: 15px; margin-right: 15px;"><img src="{% static 'CRS/images/cFaculty/plus.png' %}" width="auto" height="20px"></a>
+                                                </div>
+                                            </td>  
+                                        </tr>
+                                       {%endif%}
+                                        {% endfor %}
+                                    </table> 
+                                   
+
+                                </div>  
+                            </form>  
+                        </div>
+                    <!--End of Right Side-->
+
+
+                    <div class="col-lg-4">
+                        <div class="col-lg-12 mt-3">
+                            <!--Search box-->
+
+                            <!--End of Search box-->
+                            
+                            <hr class="greyLine">
+                            <br><br><br><br><br>
+                    
+                            <div class="confirmSChedContainer">
+                                <img src="{% static 'CRS/images/cFaculty/clip-keep-yourself-busy-in-isolation.png' %}" height="250px" width="auto"><br>
+   
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <!--End of Left Side-->
+                    
+                </div>
+                
+            </div>
+
+        </div>
+    </div>
+    {%endblock content %}
+    <!-- Javascript -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+</body>
+
+</html>

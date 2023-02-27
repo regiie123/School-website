@@ -1,0 +1,149 @@
+{%load static%}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> Student | Notification </title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
+    <link rel="stylesheet" href="{% static 'CRS/css/sHome/sHomeStyle.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito">
+    <script src="{% static 'CRS/js/cHome/cHomeMain.js' %}"></script>
+</head>
+
+<body>
+    {% block content %}
+    <div class="wrapper">
+
+        <!-- Sidebar -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <li>
+                    <p><br><br><img src="{% static 'CRS/images/sClassroom/hat.png' %}" width="87px" height="60px"><br><br>
+                </li>
+            </div>
+            <ul class="sidebar components">
+                <li class="active"><a href="{% url 'sHome' %}"><img src="{% static 'CRS/images/sClassroom/home.svg' %}" width="54px" height="68.71px"></a></li>
+                <li><a href="{% url 'sProfile' %}"><img src="{% static 'CRS/images/sClassroom/profile.svg' %}" width="97px" height="60.56px"></a></li>
+                <li><a href="{% url 'sClassroom' %}"><img src="{% static 'CRS/images/sClassroom/classroom.svg' %}" width="97px" height="74"></a></li>
+                <li><a href="{% url 'sOthers' %}"><img src="{% static 'CRS/images/sClassroom/others.svg' %}" width="61px" height="68.06px"></a></li>
+                <li><a href="{% url 'logout' %}"><img src="{% static 'CRS/images/sClassroom/log-out.svg' %}" width="72px" height="68.71px"></a></li>
+            </ul>
+        </nav>
+        <!--End of Sidebar -->
+
+        <!-- Content -->
+        <div id="content">
+
+            <div class=" container-fluid">
+
+                <!-- Welcome Panel -->
+                <div class="main row">
+
+                    <div class="col-lg-9">
+                        <div class="row" id="head">
+                            <p>Welcome</p>
+                            <p>&nbsp;Student!</p>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-9 pt-3">
+                                <table>
+                                    <tr>
+                                        <td class="notification"><a href="{% url 'sHomeNotifications' %}"><img id="notif" src="{% static 'CRS/images/sHome/notification.svg' %}" width="40px" height="30px"></a>
+                                            <div class="dropdown-menu">
+                                                <p id="notiftitle">Notifications<br></p><!-- DB NOTIFICATION DATA BELOW -->
+                                                <a  href="{% url 'HDNotifdetails' %}"><p id="notifdrops"><b>HONORABLE DISMISSAL FEEDBACK</b><br>See more details...</p><br></a>
+                                                <a  href="{% url 'LOANotifdetails' %}"><p id="notifdrops"><b>LEAVE OF ABSENCE FEEDBACK</b><br>See more details...</p><br></a>
+                                                <a  href="{% url 'OJTNotifdetails' %}"><p id="notifdrops"><b>PRACTICUM FEEDBACK</b><br>See more details...</p><br></a>
+                                                <a  href="{% url 'SPNotifdetails' %}"><p id="notifdrops"><b>STUDY PLAN FEEDBACK</b><br>See more details...</p><br></a>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <p id="pipe">|</p>
+                                        </td>
+                                        <td><img id="user" src="{% static 'CRS/images/sHome/user.svg' %}" width="35px" height="35px"></td>
+                                        <td id="uname">{{info.studentUser.firstName}} {{info.studentUser.middleName}} {{info.studentUser.lastName}}</td><!-- Yung Fullname daw dito galing DB -->
+                                        
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3">
+                        {% for acads in acad %}
+                        <table>
+                            <tr>
+                                <td class="academicYearHeader">Academic Year:</td>
+                                <td class = "academicYearDetail">{{acads.yearstarted}} - {{acads.yearended}} </td><!-- DB ACADEMIC YEAR  -->
+                            </tr>
+
+                            <tr>
+                                <td class="semesterHeader">Semester:</td>
+                                <td class = "semesterDetails">{{acads.semester}}</td><!-- DB SEMESTER  -->
+                            </tr>
+                        </table>
+                        {% endfor %}
+                    </div>
+
+                </div>
+
+                <!--NOTIFICATION-->
+                <div id="notifrow" class="row pt-5">
+                    <div id="notifcol" class="col-lg-5">
+                        <p id="notifhead"><img id="bluebell" src="{% static 'CRS/images/sHome/bluebell.svg' %}">&nbsp;&nbsp;Notification</p>
+                        
+                        <!-- DB NOTIFICATION LIST BELOW -->
+                        <p class="notifpanels"><a href="{% url 'HDNotifdetails' %}"><b>HONORABLE DISMISSAL FEEDBACK </b><br>See more details...</a></p>
+                        <p class="notifpanels"><a href="{% url 'LOANotifdetails' %}"><b>LEAVE OF ABSENCE FEEDBACK</b><br>See more details...</a></p>
+                        <p class="notifpanels"><a href="{% url 'OJTNotifdetails' %}"><b>PRACTICUM FEEDBACK </b></a><br>See more details...</p>
+                        <p class="notifpanels"><a href="{% url 'SPNotifdetails' %}"><b>STUDY PLAN FEEDBACK</b></a><br>See more details...</p>            
+                    </div>
+
+                    
+                    <div class="col-lg-7">
+                        <div class="row">
+                            <div class="col-lg-12 pl-5">
+                                <p id="notifhead2">{{ notif_type }}<br></p><!-- DB NOTIFICATION TITLE BELOW -->
+                                <p id="notifhead3"><img id="userblue" src="{% static 'CRS/images/sHome/user.svg' %}" height="35" width="35">&nbsp;&nbsp;{{description}}</p>
+                            </div>
+                        </div>
+                        <hr id="notifline">
+                        <div class="row">
+                            <div class="col-lg-12 pt-3 pl-5"><!-- DB NOTIFICATION CONTENT / MESSAGE BELOW -->
+                                <p id="notiftext">{{ feedback.comment}}</p>
+                                <p id="notiftext">{{ feedbacknone}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <!--END NOTIFICATION-->
+
+
+
+            </div>
+
+        </div>
+    </div>
+    {% endblock content %}
+    <!-- Javascript -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        function changeText(obj, text) {
+            obj.innerText = text;
+        }
+    </script>
+  
+</body>
+
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html>
+
+<head>
+    <title>Chairperson | Faculty</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
+    <link rel="stylesheet" href="{% static 'CRS/css/cFaculty/cFacultystyle.css' %}">
+    <!--Font-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito">
+     <!--Icon-->
+     <link rel="icon" href="{% static 'CRS/images/cDepartment/iPLM.png' %}" type="image/png" sizes="16x16">
+
+     <style>
+        .manage {
+        padding-left: 17px;
+        background: #0C66CC;
+        border-radius: 10px 10px 10px 10px;
+        margin-left: 100px;
+        margin-bottom: 30px;
+        padding-right:13px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+
+        }
+     </style>
+</head>
+
+<body>
+
+    <div class="wrapper">
+
+       <!-- Sidebar -->
+       <nav id="sidebar">
+        <div class="sidebar-header">
+            <li>
+                <p><br><br><img src="{% static 'CRS/images/cFaculty/hat.png' %}" width="87px" height="60px"><br><br>
+            </li>
+        </div>
+        <ul class="sidebar components">
+            <li class="active"><a href="{% url 'chairperson' %}"><img src="{% static 'CRS/images/cDepartment/home.svg' %}" width="54px" height="68.71px"></a></li>
+            <li><a href="{% url 'is_active' %}"><img src="{% static 'CRS/images/cDepartment/department.svg' %}" width="97px" height="60.56px"></a></li>
+            <li><a href="{% url 'dept_student' %}"><img src="{% static 'CRS/images/cDepartment/students.svg' %}" width="90px" height="67.14px"></a></li>
+            <li><a href="{% url 'full_time' %}"><img src="{% static 'CRS/images/cDepartment/faculty.svg' %}" width="65px" height="74.22px"></a></li>
+            <li><a href="{% url 'cOthers-studyPlan' %}"><img src="{% static 'CRS/images/cDepartment/others.svg' %}" width="61px" height="68.06px"></a></li>
+            <li><a href="{% url 'logout' %}"><img src="{% static 'CRS/images/cDepartment/log-out.svg' %}" width="72px" height="68.71px"></a></li>
+        </ul>
+    </nav>
+    <!--End of Sidebar -->
+
+
+        <!-- Content -->
+        <div id="content">
+            <div class=" container-fluid">
+                <div class="row" id="head">
+                        <p>Faculty</p>
+                    </div>
+                <!-- NAVIGATIO BAR -->
+                <div class="main row">
+                    <div class="col-lg-10">
+                        <div class="row">
+                            <div class="col-lg-9 ">
+                                <table>
+                                    <tr>
+                                        <td id="uname">
+                                            <a href="{% url 'full_time' %}">Full-time</a>
+                                        </td>
+                                        <td id="uname">
+                                            <a href="{% url 'part_time' %}">Part-time</a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!--End of NAVIGATION BAR-->
+
+                <!--FULL TIME LIST-->
+                <div class="sub-year row">
+                    <p id="fulltime">Full-Time</p><!-- FULL TIME HEADER -->
+                </div>
+                <div class="stdcnt row">
+                    <div class="row" id="facultycount"><!-- FACULTY HOME -->
+                        Faculty: {{ count }}
+                    </div>
+                </div>
+
+                <hr class="new">
+
+                <!-- TABLE HEADER -->
+                <div class="list row">
+                    <div class="col-15 ">
+                        <table>
+                            <tr>
+                                <td id="list"><b><p>Faculty No.</p></b></td><!-- Faculty Number Label -->
+                                <td id="list"><b><p>Last Name</p></b></td><!-- Last Name of Faculty -->
+                                <td id="list"><b><p>First Name</p></b></td><!-- Firs Name of Faculty -->
+                                <td id="list"><b><p>Middle Name</p></b></td><!-- Middle Name of Faculty -->
+                                <td id="list"><b><p>Manage</p></b></td><!-- Middle Name of Faculty -->
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+
+
+                <!-- DATA OF TABLE -->
+                <div class="list row">
+                        <div class="table-wrapper-scroll-y scroll">
+                            <table>
+
+                                <!--ROW 1-->
+                                {% for i in work_status %}
+                                <tr>
+                                    <td id="list"><p>{{ i.facultyID }}</p><!-- DB FACULTY NO --></td>
+                                    <td id="list"><p>{{ i.facultyUser.lastName }}</p><!-- DB LAST NAME --></td>
+                                    <td id="list"><p>{{ i.facultyUser.firstName }}</p><!-- DB FIRST NAME --></td>
+                                    <td id="listname"><p>{{ i.facultyUser.middleName }}</p><!-- DB MIDDLE NAME --></td>
+                                    <td id="manage">
+                                        <div class="manage row"><!-- DB MANAGE FACULTY BUTTON BELOW -->
+                                            <a href="{% url 'faculty_schedule' i.facultyUser.id  %}"><img src="{% static 'CRS/images/cFaculty/manage_user.png' %}" width="20px" height="20px"></a></li>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+
+                            </table>
+                        </div>
+                    </div>
+
+
+                <!--Search box-->
+                <div class="searchbox">
+                    <input type="text" name="search" id="search">&nbsp;&nbsp;
+                    <a href="#"><button type="submit" id="submit" value="Search"> Search </button></a>
+                    </button>
+                </div>
+                <!--End of Search box-->
+
+
+                <!--Gray Line-->
+                <div class="col-searchline">
+                    <div class="grayline">
+                    </div>
+                </div>
+                <!--End of gray line-->
+
+                <!--picture-->
+                <div class="picture">
+                    <img src="{% static 'CRS/images/cFaculty/clip-girl-with-pencil.png' %}" height="350px" width="350px">
+                </div>
+                <!--End of picture-->
+            </div>
+        </div>
+    </p>
+</li>
+</div>
+</nav>
+</div>
+</body>
+</html>
+
